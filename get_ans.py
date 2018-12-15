@@ -24,7 +24,7 @@ def get_ans(URL):
     length_url = len(total_url)
 
 
-    for i in tqdm(range(101, length_url)):
+    for i in tqdm(range(1, length_url)):
         item_url = total_url[i].a['href']
         # print(item_url)
         question_id = total_url[i].text.split('第')[1].split('关')[0]
@@ -33,7 +33,14 @@ def get_ans(URL):
         single_ans = item_response.read().decode("utf-8")
         single_ans = BeautifulSoup(single_ans, 'html.parser')
         item_response.close()
-        item_find = str(single_ans.find_all(attrs={"class":"news-content"})[0].find_all('p')[4])
+        ans_idx = 3
+        if(URL == expert_url and i > 100):
+            ans_idx = 4
+        elif(URL==hard_url and i > 100 and i < 121):
+            ans_idx = 4
+        else:
+            ans_idx = 3
+        item_find = str(single_ans.find_all(attrs={"class": "news-content"})[0].find_all('p')[ans_idx])
         item_len = len(item_find.split('<p>'))
         if(item_len == 2):
             ans_dict[question_id] = '['+item_find.split('<p>')[1].split('</p>')[0]+']('+item_url+')'
@@ -43,11 +50,18 @@ def get_ans(URL):
 
     return ans_dict
 
-ans = get_ans(expert_url)
 
+def run(url, file_name):
+    ans = get_ans(url)
 
-with open('expert.md','w', encoding='utf-8') as f:
-    for item in ans.keys():
-        f.write('* '+ item+' : '+ str(ans[item])+'\n')
+    with open(file_name, 'w', encoding='utf-8') as f:
+        for item in ans.keys():
+            f.write('* ' + item + ' : ' + str(ans[item]) + '\n')
+
+if __name__=="__main__":
+    # run(easy_url, 'easy.md')
+    run(hard_url, 'hard.md')
+    # run(expert_url, 'expert.md')
+
 
 
