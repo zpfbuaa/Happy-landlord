@@ -36,8 +36,8 @@ def get_ans(URL):
         ans_idx = 3
         if(URL == expert_url and i > 100):
             ans_idx = 4
-        elif(URL==hard_url and i > 100 and i < 121):
-            ans_idx = 4
+        elif(URL==hard_url and ( (i > 100 and i < 111) or i==120)):
+            ans_idx = 5
         else:
             ans_idx = 3
         item_find = str(single_ans.find_all(attrs={"class": "news-content"})[0].find_all('p')[ans_idx])
