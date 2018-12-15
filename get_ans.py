@@ -7,7 +7,6 @@
 
 from urllib import request
 from bs4 import BeautifulSoup
-import json
 from tqdm import tqdm
 
 hard_url = 'http://www.87g.com/zixun/76007.html'
