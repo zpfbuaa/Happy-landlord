@@ -59,9 +59,9 @@ def run(url, file_name):
             f.write('* ' + item + ' : ' + str(ans[item]) + '\n')
 
 if __name__=="__main__":
-    # run(easy_url, 'easy.md')
+    run(easy_url, 'easy.md')
     run(hard_url, 'hard.md')
-    # run(expert_url, 'expert.md')
+    run(expert_url, 'expert.md')
 
 
 
