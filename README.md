@@ -2,8 +2,9 @@
 Wechat game: 欢乐斗地主之残局闯关
 
 ## Code
-
-> `python3 spider_ans.py`
+> `pip3 install -r requirements.txt`
+>
+> `python3.6 spider_ans.py`
 
 ## Modify Results
 
